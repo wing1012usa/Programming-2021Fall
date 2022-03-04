@@ -1,245 +1,114 @@
-let earliestTimestamp = 1388552400000;
-let recentTimestamp = 1640926800000;
-let hovered =false;
-let click = false;
-let clicked_this = false;
-// let myFont;
-// function preload() {
-//   myFont = loadFont('Esther Chen_Final/SourceCodePro-Black.otf');
-// }
+let earliestTimestamp = 1388552400;
+let recentTimestamp = 1640926800;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   noStroke();
-  //upper section
-  for(let i=0;i<albumData.length;i++) {
-    the_date = albumData[i].release_date;
-    let d = new Date(the_date)
-    //console.log(d.getTime()) //gets you a unix timestamp
-    let xloc = map(d.getTime(), earliestTimestamp, recentTimestamp, 0, width);
-    albumData[i].xpos = xloc;
-    let yloc = map(albumData[i].album_score,0,10,150,450)
-    albumData[i].ypos = yloc
-   
-  }
-  
-  //lower section
-  for (let j=0; j<eventData.length;j++){
-    event_date=eventData[j].start_date;
-    let e = new Date(event_date)
-    // console.log(e.getTime())//get you a unix timestamp
-    let xloc = map(e.getTime(), earliestTimestamp, recentTimestamp, 0, width);
-    eventData[j].xpos = xloc;
-    let yloc = map(eventData[j].event_score,0,10, 600, 300)
-    eventData[j].ypos = yloc
-  }
-
 }
 
 function draw() {
   background(252, 250, 242);
-  strokeWeight(4);
-  stroke('white');
-  line(200, height/2, width, height/2);
-  //debut point as starting point
-  //temp
-    let debut_date = map(1432612800000, earliestTimestamp, recentTimestamp, 0, width);
-    let debut_col = color(239,166,170);
-  fill(debut_col);
-  noStroke();
-  ellipse(debut_date,windowHeight/2,20);
+  //album timeline
+  let debut_date = map(1432612800, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let album_0_loc = map(1432872000, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let album_1_loc = map(1441857600, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let album_2_loc = map(1461556800, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let album_3_loc = map(1467604800, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let album_4_loc = map(1480914000, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let album_5_loc = map(1495425600, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let album_6_loc = map(1509944400, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let album_7_loc = map(1517806800, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let album_8_loc = map(1527652800, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let album_9_loc = map(1531713600, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let album_10_loc = map(1548046800, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let album_11_loc = map(1559102400, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let album_12_loc = map(1568606400, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let album_13_loc = map(1585713600, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let album_14_loc = map(1592798400, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let album_15_loc = map(1599624000, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let album_16_loc = map(1603080000, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let album_17_loc = map(1618459200, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let album_18_loc = map(1623988800, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let album_19_loc = map(1634875200, earliestTimestamp, recentTimestamp, 0, windowWidth);
 
-  let firstyear = map(1451624400000, earliestTimestamp, recentTimestamp, 0, width);
+  //debut_date as starting point
+  let debut_col = color(239,166,170);
   fill(debut_col);
   noStroke();
-  //ellipse(firstyear,windowHeight/2,10);
-  text('2016',325, 380,firstyear,windowHeight/2);
-  textStyle(NORMAL);
-  textSize(30);
-  
-  let secondyear = map(1483246800000, earliestTimestamp, recentTimestamp, 0, width);
-  fill(debut_col);
-  noStroke();
-  //ellipse(secondyear,windowHeight/2,10);
-  text('2017',500, 380,secondyear,windowHeight/2);
-  textStyle(NORMAL);
-  textSize(30);
-  
-  let thirdyear = map(1514782800000, earliestTimestamp, recentTimestamp, 0, width);
-  fill(debut_col);
-  noStroke();
-  //ellipse(thirdyear,windowHeight/2,10);
-  text('2018',685, 380,thirdyear,windowHeight/2);
-  textStyle(NORMAL);
-  textSize(30);
+  ellipse(debut_date,windowHeight/2,30);
 
-  let forthyear = map(1546318800000, earliestTimestamp, recentTimestamp, 0, width);
-  fill(debut_col);
-  noStroke();
-  //ellipse(forthyear,windowHeight/2,10);
-  text('2019',865, 380,forthyear,windowHeight/2);
-  textStyle(NORMAL);
-  textSize(30);
-
-  let fifthyear = map(1577854800000, earliestTimestamp, recentTimestamp, 0, width);
-  fill(debut_col);
-  noStroke();
-  //ellipse(fifthyear,windowHeight/2,10);
-  text('2020',1045, 380,fifthyear,windowHeight/2);
-  textStyle(NORMAL);
-  textSize(30);
-
-  let sixthyear = map(1609477200000, earliestTimestamp, recentTimestamp, 0, width);
-  fill(debut_col);
-  noStroke();
-  //ellipse(sixthyear,windowHeight/2,10);
-  text('2021',1225, 380,sixthyear,windowHeight/2);
-  textStyle(NORMAL);
-  textSize(30);
 
   //album timeline
   let album_col = color(252, 250, 242);
   fill(album_col);
   stroke(239,166,170);
-  //this is check constantly for hover events
-let intersect_anything = false; // intersect < 25
-let intersect_center = false; //intersect < 10
-for (let i=0;i<albumData.length;i++) {
-  intersectDist = dist(albumData[i].xpos,albumData[i].ypos,mouseX,mouseY)
-  if (intersectDist < 25){
-    fill('white')
-      intersect_anything = true;
-    if (click == true) {
-        //console.log("Clicked " + albumData[i].album_name);
-        click = false;
-        clicked_this = true;
-        //disply click box
-        disply_album_click(albumData[i])
-      }
-  } else {
-    fill(album_col)
-  }
-      if (intersectDist < 10){
-        intersect_center = true
-
-        if (hovered == false && !clicked_this) {
-          hovered = true
-        //console.log(albumData[i].album_name)
-        //display box
-        display_album_info(albumData[i])
-      }
-
-      
-      }
-
-  ellipse(albumData[i].xpos, albumData[i].ypos, 50)
-fill(252, 250, 242)
-ellipse(albumData[i].xpos, albumData[i].ypos, 20)
-}
-
+  
+  ellipse(album_0_loc, 300, 50);
+  ellipse(album_1_loc, 350, 50);
+  ellipse(album_2_loc, 210, 50);//first no1 reward
+  ellipse(album_3_loc, 300, 50);
+  ellipse(album_4_loc, 210, 50);//first all kill album
+  ellipse(album_5_loc, 300, 50);
+  ellipse(album_6_loc, 250, 50);
+  ellipse(album_7_loc, 300, 50);
+  ellipse(album_8_loc, 210, 50);//first jp album
+  ellipse(album_9_loc, 345, 50);
+  ellipse(album_10_loc, 300, 50);
+  ellipse(album_11_loc, 350, 50);
+  ellipse(album_12_loc, 270, 50);
+  ellipse(album_13_loc, 320, 50);
+  ellipse(album_14_loc, 210, 50);//first million seller
+  ellipse(album_15_loc, 300, 50);
+  ellipse(album_16_loc, 350, 50);
+  ellipse(album_17_loc, 250, 50);
+  ellipse(album_18_loc, 300, 50);
+  ellipse(album_19_loc, 335, 50);
 
   //event timeline
-  let event_col = color(252,250,242);
-     fill (event_col);
-     stroke(146,168,209);
- // let intersect_blue = false; //intersect < 10
-  for(let j=0;j<eventData.length;j++){
-    intersectDist = dist(eventData[j].xpos, eventData[j].ypos, mouseX, mouseY)
-    if (intersectDist < 25){
-      fill('white')
-        intersect_anything = true;
-        if (click == true) {
-          console.log("Clicked " + eventData[j].event_title);
-          click = false;
-          clicked_this = true;
-          display_event_click(eventData[j])
-        }
-    } else {
-      fill(album_col)
-    }
-       if (intersectDist<10){
-        intersect_center = true
-         if (hovered == false && !clicked_this) {
-           hovered = true
-           display_event_info(eventData[j])
-         }  
-    }
-    ellipse(eventData[j].xpos, eventData[j].ypos, 50)
-    fill(252, 250, 242)
-    ellipse(eventData[j].xpos, eventData[j].ypos, 20)
-  }
-
- if (!intersect_anything) {
-    if (clicked_this == true) {
-      clicked_this = false;
-    }
-}
-  if (!intersect_center) { 
-    if (hovered == true) {
-      //excute any mouse off events!!
-    hovered = false
-    }
-  }
-    
-}
-    //hover display info album
-    function display_album_info(data) {
-
-      var infoBox = document.getElementById("inputResults");
-          infoBox.style.left = (data.xpos -50) + 'px'
-          infoBox.style.top = (data.ypos + 10) + 'px'
-          infoBox.style.visibility = "visible";
-      let myImage = "<img src = 'album_cover/" + data.album_cover +
-      "' height=100>";
-
-       infoBox.innerHTML = 
-       "<div class='album_info'>"+ 
-       "<h1>" + data.album_name + "</h1>" + 
-       "<h3>" + data.album_sub + "</h3>" + 
-       "<h4>" + "<BR>" + "Release Date" + "</BR>"+ data.release_date + "</h4>" +
-       "<p>" + myImage + "</p>"
-       "</div>"
-      }
-  //hover display info event
-  function display_event_info(data){
-     var infoBox = document.getElementById("inputResults");
-         infoBox.style.left = (data.xpos + 10) + 'px'
-         infoBox.style.top = (data.ypos + 10) + 'px'
-         infoBox.style.visibility = "visible";
-         let myImage = "<img src = 'Event/" + data.concert_poster +
-         "' height=100>";
-      
-     infoBox.innerHTML = 
-     "<div class = 'event_info'>" +
-     "<h1>" + data.event_title + "</h1>" +
-     "<h3>" + data.start_date + " ~ " + data.end_date +"</h3>" + 
-     "<h3>" + "Start City: " + data.city_1 + "</h3>" +
-     "<p>" + myImage + "</p>";
-     "</div>"
-  }
-  //click display info
-  function disply_album_click(data) {
-    var clickBox = document.getElementById("inputResults");
-let emb_video = '<iframe width="560" height="315" src="'+data.video+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-console.log(emb_video)
-    clickBox.innerHTML =
-    "<div class = 'album_click'>" +
-    "<h1>" + data.title_song + "</h1>" +
-    "<p>" + emb_video + "</p></div>";
-  }
-
-  function display_event_click(data){
-    var clickBox = document.getElementById("inputResults");
-                let emb_video = '<iframe width="560" height="315" src="'+data.video+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-
-    clickBox.innerHTML =
-    "<div class = 'event_click'>" + 
-    "<h1>" + data.event_title + "</h1>" +
-    "<p>" + emb_video + "</p>";
-  }
-
+  let event_0_loc = map(1450933200, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let event_1_loc = map(1455426000, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let event_2_loc = map(1469851200, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let event_3_loc = map(1471060800, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let event_4_loc = map(1486702800, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let event_5_loc = map(1487134800, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let event_6_loc = map(1500004800, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let event_7_loc = map(1517547600, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let event_8_loc = map(1519189200, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let event_9_loc = map(1530158400, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let event_10_loc = map(1541217600, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let event_11_loc = map(1552021200, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let event_12_loc = map(1554177600, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let event_13_loc = map(1567137600, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let event_14_loc = map(1598760000, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let event_15_loc = map(1611378000, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let event_16_loc = map(1628395200, earliestTimestamp, recentTimestamp, 0, windowWidth);
+  let event_17_loc = map(1636866000, earliestTimestamp, recentTimestamp, 0, windowWidth);
   
-  
-function mouseClicked() {
-  click = true;
+  //event timeline
+  let event_col = color(252, 250, 242);
+  fill(album_col);
+  stroke(146,168,209);
+
+  //event timeline stander point
+  let new_point = windowHeight/2-(350-windowHeight/2);//equle 350 on upper side
+
+  ellipse(event_0_loc, new_point+70, 50);
+  ellipse(event_1_loc, new_point, 50);
+  ellipse(event_2_loc, new_point+140, 50);//first concert in JP
+  ellipse(event_3_loc, new_point+20, 50);//first asia tour
+  ellipse(event_4_loc, new_point+100, 50);
+  ellipse(event_5_loc, new_point+10, 50);
+  ellipse(event_6_loc, new_point+140, 50);//First tour in North America
+  ellipse(event_7_loc, new_point+60, 50);
+  ellipse(event_8_loc, new_point+130, 50);
+  ellipse(event_9_loc, new_point+20, 50);
+  ellipse(event_10_loc, new_point+70, 50);
+  ellipse(event_11_loc, new_point+120, 50);
+  ellipse(event_12_loc, new_point+10, 50);
+  ellipse(event_13_loc, new_point+140, 50);//Taipei, EU canceled due to Covid
+  ellipse(event_14_loc, new_point+130, 50);
+  ellipse(event_15_loc, new_point+40, 50);
+  ellipse(event_16_loc, new_point+100, 50);
+  ellipse(event_17_loc, new_point+20, 50);
+
 }
